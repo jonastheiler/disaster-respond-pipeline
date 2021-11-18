@@ -10,38 +10,44 @@
 
 ## Motivation <a name="motivation"></a>
 
-The aim of the project was structured into 3 sections:
-1. Create an ETL-script that takes two csv-files, merges and clean them and stores the result into a SQLite database.
-2. Create a Machine-Learning-script that takes the data from the database and builds a machine learning pipeline that 
-processes text and then performs a multi-output-classification. The script uses a tokenize function to tokenize, normalize 
-and lemmatize text by using NLTK.
-3. Deploy the trained model to a Flask web-app that classifies user input for 36 different categories.
+The aim of the project was divided into 3 sections:
+1. creating an ETL script that takes two CSV files, merges and cleans them, and stores the result in a SQLite database.
+2. creating a Python script that takes the data from the database and creates a machine learning pipeline that processes 
+text and then performs multi-output classification. The script uses a tokenize function to tokenise, normalise 
+and lemmatise text using NLTK.
+3. deploying the trained model in a Flask web app that classifies user input for 36 different categories.
+
 
 ## File description <a name="file"></a>
 
-The data that have been used for this supervised learning project were a dataset with disaster message-data 
-(disaster_messages.csv) and the corresponding category-data (disaster_categories.csv). The datasets were provided by 
+The data used for this supervised learning project were a dataset of disaster reporting data 
+(disaster_messages.csv) and the corresponding category data (disaster_categories.csv). The datasets were provided by 
 [Figure Eight](https://appen.com/).
 
-- ETL Pipeline Preparation.ipynb: Jupyter notebook to build the ETL-script and getting an overview about the data.
-  - data/process_data.py: Python-script built with the preparation above to create the pipeline.
+- ETL Pipeline Preparation.ipynb: Jupyter notebook to create the ETL script and get an overview of the data.
+  - data/process_data.py: Python script created with the above preparation to create the pipeline.
 
-- ML Pipeline Preparation.ipynb: Jupyter notebook to prepare the machine-learning-pipeline, create the tokenize function 
-and optimize the model.
-  - models/train_classifier.py: Python-script to create the machine-learning-pipeline.
-  - models/classifier.pkl: Pickle-file containing the model trained in the pipeline above.
+- ML Pipeline Preparation.ipynb: Jupyter notebook to prepare the machine learning pipeline, create the tokenize function 
+and optimisation of the model.
+  - models/train_classifier.py: Python script to create the machine learning pipeline.
+  - models/classifier.pkl: Pickle file containing the model trained in the above pipeline.
+
 
 ## Results <a name="results"></a>
 
-As mentioned the result of this project is web-app where in case of an emergency a new message can be classified in 
-different categories.
+As already mentioned, the result of this project is a web app that can be used to classify a new message into different categories in an emergency. 
+can be classified into different categories.
 
 
-Potential for improvements: Although the ML-pipeline uses GridSearchCV to optimize the classification, there is still a 
-lot of space for improvements:
-- Test different estimators to optimize the classification (in this project RandomForestClassifier() has been used)
-- Set an extended list of parameters for GridSearchCV for optimizing the model
-- Use FeatureUnion to extend the pipeline for better results
+Potential for improvement: Although the ML pipeline uses GridSearchCV to optimise classification, there is still 
+much room for improvement:
+- Testing different estimators to optimise classification (RandomForestClassifier() was used in this project).
+- Setting an extended list of parameters for GridSearchCV to optimise the model.
+- Using FeatureUnion to extend the pipeline for better results
+
+
+![bild](data/Screenshot-Disaster-Response.png)
+Screenshot of the Disaster Response Pipeline
 
 ## Instructions <a name="instructions"></a>
 
