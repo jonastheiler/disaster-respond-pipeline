@@ -80,9 +80,7 @@ def build_model():
 
     parameters = {
         'vect__max_features': (None, 5000),
-        'tfidf__use_idf': (True, False),
-        'clf__estimator__n_estimators': [50, 100],
-        'clf__estimator__min_samples_split': [2, 3]
+        'clf__estimator__n_estimators': [50, 100]
     }
 
     cv = GridSearchCV(pipeline, param_grid=parameters, n_jobs=-1)
@@ -111,11 +109,11 @@ def evaluate_model(model, X_test, Y_test):
 
 def save_model(model, model_filepath):
     """
-    Function to save the model as a Pickel file
+    Function to save the model as a Pickle-file
 
     Args:
     model: model to save
-    model_filepath: path of the Pickel file (str)
+    model_filepath: path of the Pickle-file (str)
     """
     with open(model_filepath, 'wb') as f:
         pickle.dump(model, f)

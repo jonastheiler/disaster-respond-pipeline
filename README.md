@@ -11,43 +11,62 @@
 ## Motivation <a name="motivation"></a>
 
 The aim of the project was divided into 3 sections:
-1. creating an ETL script that takes two CSV files, merges and cleans them, and stores the result in a SQLite database.
-2. creating a Python script that takes the data from the database and creates a machine learning pipeline that processes 
-text and then performs multi-output classification. The script uses a tokenize function to tokenise, normalise 
-and lemmatise text using NLTK.
-3. deploying the trained model in a Flask web app that classifies user input for 36 different categories.
+1. creating an ETL-pipeline that takes two CSV files, merges and cleans them, and stores the result in a SQLite database.
+2. creating a ML-pipeline that takes the data from the database and processes text and performs a multi-output 
+classification. The script uses NLTK, scikit-learn's Pipeline and GridSearchCV.
+3. deploying the trained model in a Flask web app where you can input a new message and get classification results in 
+different categories.
 
 
 ## File description <a name="file"></a>
 
-The data used for this supervised learning project were a dataset of disaster reporting data 
-(disaster_messages.csv) and the corresponding category data (disaster_categories.csv). The datasets were provided by 
-[Figure Eight](https://appen.com/).
+The data used for this supervised learning project were a dataset of disaster responding data (disaster_messages.csv) 
+and the corresponding category data (disaster_categories.csv). The datasets were provided by [Figure Eight](https://appen.com/).
 
-- ETL Pipeline Preparation.ipynb: Jupyter notebook to create the ETL script and get an overview of the data.
-  - data/process_data.py: Python script created with the above preparation to create the pipeline.
+The following files has been uploaded to the repository:
 
-- ML Pipeline Preparation.ipynb: Jupyter notebook to prepare the machine learning pipeline, create the tokenize function 
-and optimisation of the model.
-  - models/train_classifier.py: Python script to create the machine learning pipeline.
-  - models/classifier.pkl: Pickle file containing the model trained in the above pipeline.
+- app
+  - run.py: python script to run the model for the web app.
+  - templates
+    - master.html: script to construct the web app.
+    - go.html: extension for master.html.
+
+- data
+  - process_data.py: Python script created with the above preparation to create the pipeline.
+  - disaster_message.csv: data input for the message data.
+  - disaster_categories.csv: data input for the category data.
+  - DisasterResponse.db: database containing the merged, cleaned data produced by the process_data.py script
+
+- models
+  - train_classifier.py: Python script to create the machine learning pipeline.
+  - (missing, to big) classifier.pkl: Pickle file that contains the model from the train_classifier.py script.
+
+- preparation
+  - ETL Pipeline Preparation.ipynb: Jupyter notebook to create the ETL script and get an overview of the data.
+  - ML Pipeline Preparation.ipynb: Jupyter notebook to prepare the machine learning pipeline, create the tokenize function.
+
+- README.md
 
 
 ## Results <a name="results"></a>
 
-As already mentioned, the result of this project is a web app that can be used to classify a new message into different categories in an emergency. 
-can be classified into different categories.
+As already mentioned, the result of this project is a web app that can be used to classify events into different 
+categories so it will be possible to forward the message to the appropiate disaster relief agency.
 
-
-Potential for improvement: Although the ML pipeline uses GridSearchCV to optimise classification, there is still 
-much room for improvement:
-- Testing different estimators to optimise classification (RandomForestClassifier() was used in this project).
-- Setting an extended list of parameters for GridSearchCV to optimise the model.
-- Using FeatureUnion to extend the pipeline for better results
-
-
-![bild](data/Screenshot-Disaster-Response.png)
+![bild](Screenshot-Disaster-Response.png)
 Screenshot of the Disaster Response Pipeline
+
+
+
+#### Reflection
+
+I am happy with the result and fully functional web app. Although everything works, there is still enough room for 
+improvements:
+- Testing different estimators to optimise the classification (RandomForestClassifier() was used in this project).
+- Setting an extended list of parameters for GridSearchCV to optimise the model (long performance time problems)
+- Using FeatureUnion to extend the pipeline with other transformations for better results. For example on could have 
+used different transformations in NLP.
+- Also, the web app could have been deployed to Heroku (or similar provider) for easy access to the result.
 
 ## Instructions <a name="instructions"></a>
 
