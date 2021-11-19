@@ -32,7 +32,7 @@ engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('disaster_respond', engine)
 
 # load model
-model = joblib.load("../models/classifier.pkl")
+model = joblib.load("../../classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -49,6 +49,10 @@ def index():
     sum_list = []
     for i in range(len(Y)):
         sum_list.append(Y.iloc[i].sum())
+
+    cat_data = Y.iloc[:, :].sum().sort_values(ascending=False)[0:10]
+    cat_names = cat_data.index
+    cat_values = cat_data.values
 
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -73,18 +77,36 @@ def index():
         },
         {
             'data': [
+                Bar(
+                    y=cat_names,
+                    x=cat_values,
+                    orientation='h'
+                )
+            ],
+
+            'layout': {
+                'title': 'Most common categories',
+                'yaxis': {
+                },
+                'xaxis': {
+                    'title': "Counts"
+                }
+            }
+        },
+        {
+            'data': [
                 Histogram(
                     x=sum_list
                 )
             ],
 
             'layout': {
-                'title': 'Most common Number of Categories',
+                'title': 'Number of classifications made for a message in the training data',
                 'yaxis': {
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Number of Categories"
+                    'title': "Number of classifications for a message"
                 }
             }
         }
@@ -118,7 +140,6 @@ def go():
 
 def main():
     app.run(host='0.0.0.0', port=3001, debug=True)
-
 
 if __name__ == '__main__':
     main()
