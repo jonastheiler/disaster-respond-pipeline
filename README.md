@@ -39,7 +39,7 @@ The following files has been uploaded to the repository:
 
 - models
   - train_classifier.py: Python script to create the machine learning pipeline.
-  - (missing, to big) classifier.pkl: Pickle file that contains the model from the train_classifier.py script.
+  - (missing, too big) classifier.pkl: Pickle file that contains the model from the train_classifier.py script.
 
 - preparation
   - ETL Pipeline Preparation.ipynb: Jupyter notebook to create the ETL script and get an overview of the data.
