@@ -40,14 +40,14 @@ def clean_data(df):
     row = categories_df.iloc[0]
 
     # use this row to extract a list of new column names for categories.
-    category_colnames = row.tolist()
+    category_colnames = row.astype(str).apply(lambda x: x[:-2]).tolist()
 
     # rename the columns of `categories`
     categories_df.columns = category_colnames
 
     for column in categories_df:
         # set each value to be the last character of the string
-        categories_df[column] = categories_df[column].astype(str).str.strip().str[-1]
+        categories_df[column] = categories_df[column].astype(str).str[-1]
 
         # convert column from string to numeric
         categories_df[column] = pd.to_numeric(categories_df[column])
@@ -57,6 +57,9 @@ def clean_data(df):
 
     # concatenate the original dataframe with the new `categories` dataframe
     df = pd.concat([df, categories_df], axis=1, join='inner')
+
+    # replace the in column related the entry 2 with 1 (the column now is binary and not multiclass)
+    df['related'] = df['related'].replace(2, 1)
 
     # drop duplicates
     df = df.drop_duplicates()
@@ -73,7 +76,7 @@ def save_data(df, database_filename):
     database-filename: the name of the database
     """
     engine = create_engine('sqlite:///{}'.format(database_filename))
-    df.to_sql('disaster_respond', engine, index=False)
+    df.to_sql('disaster_respond', engine, if_exists='replace',index=False)
 
 
 def main():

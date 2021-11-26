@@ -10,6 +10,12 @@
 
 ## Motivation <a name="motivation"></a>
 
+Imagine there is an environmental disaster that affects a part of the world where many people live. Some of them really 
+need help in the form of medicine, food, machinery, etc. To attract attention, they are likely to send emergency messages 
+in the hope that the message will be read and the right action will be taken. This project provides an engine that 
+classifies these disaster messages into different categories to make the process of organising help for those who really 
+need it as efficient as possible. 
+
 The aim of the project was divided into 3 sections:
 1. creating an ETL-pipeline that takes two CSV files, merges and cleans them, and stores the result in a SQLite database.
 2. creating a ML-pipeline that takes the data from the database and processes text and performs a multi-output 
